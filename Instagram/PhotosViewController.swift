@@ -24,6 +24,10 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.rowHeight = 320
         
+        self.tableView.registerNib("PhotosViewController", forCellReuseIdentifier: "InstagramCell")
+        
+        
+
         
         
         let clientId = "e05c462ebd86446ea48a5af73769b602"
