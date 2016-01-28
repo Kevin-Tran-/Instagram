@@ -10,7 +10,10 @@ import UIKit
 
 class InstagramCell: UITableViewCell {
 
+    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var instagramPic: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

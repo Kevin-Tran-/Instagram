@@ -80,15 +80,31 @@
 		BC5427521C599189001E5F30 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				BCF5FE2B1C5ABDB20098F159 /* ViewController */,
+				BCF5FE2A1C5ABD620098F159 /* Views */,
 				BC5427531C599189001E5F30 /* AppDelegate.swift */,
-				BC5427551C599189001E5F30 /* PhotosViewController.swift */,
 				BC5427571C599189001E5F30 /* Main.storyboard */,
-				BCF5FE281C59AA370098F159 /* InstagramCell.swift */,
 				BC54275A1C599189001E5F30 /* Assets.xcassets */,
 				BC54275C1C599189001E5F30 /* LaunchScreen.storyboard */,
 				BC54275F1C599189001E5F30 /* Info.plist */,
 			);
 			path = Instagram;
+			sourceTree = "<group>";
+		};
+		BCF5FE2A1C5ABD620098F159 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BCF5FE281C59AA370098F159 /* InstagramCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BCF5FE2B1C5ABDB20098F159 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BC5427551C599189001E5F30 /* PhotosViewController.swift */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

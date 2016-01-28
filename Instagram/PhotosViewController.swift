@@ -7,16 +7,25 @@
 //
 
 import UIKit
+import AFNetworking
 
 
-class PhotosViewController: UIViewController {
+
+class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
-    var instapost: [NSDictionary]?
+    var instaposts: [NSDictionary]?
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 320
+        
+        
+        
         let clientId = "e05c462ebd86446ea48a5af73769b602"
         let url = NSURL(string:"https://api.instagram.com/v1/media/popular?client_id=\(clientId)")
         let request = NSURLRequest(URL: url!)
@@ -32,7 +41,7 @@ class PhotosViewController: UIViewController {
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
                             NSLog("response: \(responseDictionary)")
-                            self.instapost = responseDictionary["data"] as? [NSDictionary]
+                            self.instaposts = responseDictionary["data"] as? [NSDictionary]
                             self.tableView.reloadData()
                     }
                 }
@@ -41,31 +50,31 @@ class PhotosViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let instapost = instapost {
-            return instapost.count
+        if let instaposts = instaposts {
+            return instaposts.count
         } else {
             return 0
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("InstagramCell", forIndexPath: indexPath) as! InstagramCell
         
-        let movie = movies![indexPath.row]
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        let posterPath = movie["poster_path"] as! String
-        
-        let baseURL = "http://image.tmdb.org/t/p/w500"
-        
-        let imageURL = NSURL(string: baseURL + posterPath)
-        
-        cell.posterView.setImageWithURL(imageURL!)
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
-        
-        
-        print("row \(indexPath.row)")
+        let instapost = instaposts![indexPath.row]
+        let name = instapost["user"]!["username"] as? String!
+//        let overview = movie["overview"] as! String
+//        let posterPath = movie["poster_path"] as! String
+//        
+//        let baseURL = "http://image.tmdb.org/t/p/w500"
+//        
+//        let imageURL = NSURL(string: baseURL + posterPath)
+
+//        cell.nameLabel.text = "test"
+//        cell.likeLabel.text = "1000"
+//        print("row \(indexPath.row)")
+        if let name = name {
+            cell.nameLabel!.text = name
+        }
         return cell
         
     }
