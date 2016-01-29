@@ -24,12 +24,8 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.rowHeight = 320
         
-        self.tableView.registerNib("PhotosViewController", forCellReuseIdentifier: "InstagramCell")
-        
-        
+        tableView.registerClass(InstagramCell.self, forCellReuseIdentifier: "InstagramCell")
 
-        
-        
         let clientId = "e05c462ebd86446ea48a5af73769b602"
         let url = NSURL(string:"https://api.instagram.com/v1/media/popular?client_id=\(clientId)")
         let request = NSURLRequest(URL: url!)
@@ -62,23 +58,36 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("InstagramCell", forIndexPath: indexPath) as! InstagramCell
         
         let instapost = instaposts![indexPath.row]
-        let name = instapost["user"]!["username"] as? String!
-//        let overview = movie["overview"] as! String
-//        let posterPath = movie["poster_path"] as! String
-//        
-//        let baseURL = "http://image.tmdb.org/t/p/w500"
-//        
-//        let imageURL = NSURL(string: baseURL + posterPath)
-
-//        cell.nameLabel.text = "test"
-//        cell.likeLabel.text = "1000"
-//        print("row \(indexPath.row)")
-        if let name = name {
-            cell.nameLabel!.text = name
+        
+        if let name = instapost.valueForKeyPath("user.username") as? String {
+            if let username = cell.nameLabel {
+                username.text = name
+            }
         }
+//        let like = instapost.valueForKeyPath("likes.count") as? String!
+        
+        if let image = instapost.valueForKeyPath("images.standard_resolution.url") as! String! {
+            //if let imageLoad = cell.instagramPic {
+                let imageURL = NSURL(string: image)
+                cell.instagramPic.setImageWithURL(imageURL!)
+            //}
+        }
+        
+
+        //print("row \(indexPath.row)")
+//        if let username = cell.nameLabel {
+//            username.text = name
+//        }
+//        if let likes = cell.likeLabel {
+//            likes.text = like
+//        }
+//
+//            imageLoad.setImageWithURL(imageURL!)
+//        }
         return cell
         
     }
