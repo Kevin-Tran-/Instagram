@@ -87,7 +87,7 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         if let like = instapost.valueForKeyPath("likes.count") as? Int!{
-            cell.likeLabel.text = String("Like: \(like)")
+            cell.likeLabel.text = String("\(like) likes")
         }
         
         if let image = instapost.valueForKeyPath("images.standard_resolution.url") as! String! {
@@ -101,10 +101,10 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 60))
         headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
         
-        let profileView = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
+        let profileView = UIImageView(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
         profileView.clipsToBounds = true
         profileView.layer.cornerRadius = 15;
         profileView.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).CGColor
@@ -123,10 +123,10 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //print(instaposts)
         print(section)
         // Add a UILabel for the username here
-        let nameView = UILabel(frame: CGRect(x: 50, y: 10, width: 300, height: 30))
+        let nameView = UILabel(frame: CGRect(x: 50, y: 0, width: 300, height: 30))
         
         nameView.font = UIFont.boldSystemFontOfSize(16)
-        nameView.textColor = UIColor(red: 8/255.0, green: 64/255.0, blue: 127/255.0, alpha: 1)
+        nameView.textColor = UIColor(red: 18/255.0, green: 86/255.0, blue: 136/255.0, alpha: 1) //http://designpieces.com/palette/instagram-colour-palette-hex-and-rgb/
         
         
         if let name = instaposts![section].valueForKeyPath("user.username") as? String {
