@@ -11,7 +11,6 @@ import UIKit
 class InstagramCell: UITableViewCell {
 
     @IBOutlet weak var likeLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var instagramPic: UIImageView!
     
     override func awakeFromNib() {
